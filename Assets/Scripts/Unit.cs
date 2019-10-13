@@ -40,4 +40,34 @@ public abstract class Unit : MonoBehaviour
         this.type = "Unit";
 
     }
+
+    public void Combat()
+    {
+
+    }
+
+    public void AttackingRange()
+    {
+
+    }
+
+    public void ClosestEnemy()
+    {
+
+    }
+
+    public void Death()
+    {
+
+    }
+
+    public override string ToString()
+    {
+        return base.ToString();
+    }
+
+    public void Movement()
+    {
+        
+    }
 }
