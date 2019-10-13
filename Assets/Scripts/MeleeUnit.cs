@@ -1,0 +1,24 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+
+public class MeleeUnit : Unit
+{
+
+    public MeleeUnit(int faction, int health, int maxHealth, int speed, int attack, int attackRange) : base(faction, health, maxHealth, speed, attack, attackRange)
+    {
+
+    }
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+}
