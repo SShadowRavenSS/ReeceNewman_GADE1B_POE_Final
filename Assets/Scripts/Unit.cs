@@ -18,6 +18,7 @@ public abstract class Unit : MonoBehaviour
     protected float attackRange;
     protected string type;
     private Random rng = new Random();
+    protected bool isInRange;
 
 
     //Accessors for the variables
@@ -46,7 +47,7 @@ public abstract class Unit : MonoBehaviour
 
         unitToAttack.health -= this.attack;
 
-        Debug.Log("Attttttttack!!!!");
+        Debug.Log("Attttttttack!!!!  Health Remaining: " + unitToAttack.health);
     }
 
     public bool IsDead()
@@ -111,11 +112,6 @@ public abstract class Unit : MonoBehaviour
 
     }
 
-    public void IsInRange()
-    {
-
-        
-    }
 
     public override string ToString()
     {
@@ -129,21 +125,32 @@ public abstract class Unit : MonoBehaviour
 
         Movement(ClosestUnit(units));
 
+        if(isInRange == true)
+        {
+            Unit unitToAttack = ClosestUnit(units);
+            Combat(unitToAttack);
+        }
         
-    
-        
+
+
+
 
 
     }
 
     public void OnTriggerEnter(Collider other)
     {
-
         if(other.tag == "Unit")
         {
-            other.gameObject.GetComponent<Unit>().Health -= this.attack;
-            Debug.Log(other.gameObject.GetComponent<Unit>().Health);
-            
+            isInRange = true;    
+        }
+    }
+
+    public void OnTriggerExit(Collider other)
+    {
+        if(other.tag == "Unit")
+        {
+            isInRange = false;
         }
     }
 }
