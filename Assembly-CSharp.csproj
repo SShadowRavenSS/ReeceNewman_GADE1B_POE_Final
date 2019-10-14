@@ -60,7 +60,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\CameraMovement.cs" />
     <Compile Include="Assets\Scripts\MeleeUnit.cs" />
+    <Compile Include="Assets\Scripts\RangedUnit.cs" />
     <Compile Include="Assets\Scripts\Unit.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>E:/Work/Vega/Game Development/Semester 2/POE/repos/Task4/ReeceNewman_GADE1B_POE_FinaL/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
