@@ -9,11 +9,11 @@ public abstract class Unit : MonoBehaviour
     protected int faction;
     protected bool isAttacking;
     [SerializeField]
-    protected float health = 10;
-    protected float maxHealth = 10;
+    protected float health;
+    protected float maxHealth;
     [SerializeField]
-    protected float speed =2;
-    protected float attack = 2;
+    protected float speed;
+    protected float attack;
     [SerializeField]
     protected float attackRange;
     protected string type;
@@ -31,19 +31,14 @@ public abstract class Unit : MonoBehaviour
     public bool IsAttacking { get => isAttacking; set => isAttacking = value; }
     public string Type { get => type; set => type = value; }
 
-    public Unit(int faction, int health, int maxHealth, int speed, int attack, int attackRange)
+    public void Start()
     {
-        
-        this.faction = faction;
-        this.isAttacking = false;
-        this.health = 10f;
-        this.maxHealth = 10f;
-        this.speed = 2f;
-        this.attack = 2f;
-        this.attackRange = 5f;
-        this.type = "Unit";
+        BoxCollider temp = GetComponent<BoxCollider>();
+        temp.size = new Vector3(5, 1, 5);
 
-        
+        attack = 2f;
+        speed = 2f;
+        health = 10f;
     }
 
     public void Combat(Unit unitToAttack)
