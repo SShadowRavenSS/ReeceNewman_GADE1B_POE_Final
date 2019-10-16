@@ -19,10 +19,11 @@ public abstract class Unit : MonoBehaviour
     protected string type;
     private Random rng = new Random();
     protected bool isInRange;
-
+    [SerializeField] protected Material[] mat;
+    [SerializeField] protected int team;
 
     //Accessors for the variables
-    
+
     public float Health { get => health; set => health = value; }
     public float MaxHealth { get => maxHealth; }
     public float Speed { get => speed; set => speed = value; }
@@ -32,17 +33,9 @@ public abstract class Unit : MonoBehaviour
     public bool IsAttacking { get => isAttacking; set => isAttacking = value; }
     public string Type { get => type; set => type = value; }
 
-    public void Start()
-    {
-        BoxCollider temp = GetComponent<BoxCollider>();
-        temp.size = new Vector3(5, 1, 5);
+    
 
-        attack = 2f;
-        speed = 2f;
-        health = 10f;
-    }
-
-    public void Combat(Unit unitToAttack)
+    protected void Combat(Unit unitToAttack)
     {
 
         unitToAttack.health -= this.attack;
@@ -50,19 +43,29 @@ public abstract class Unit : MonoBehaviour
         Debug.Log("Attttttttack!!!!  Health Remaining: " + unitToAttack.health);
     }
 
-    public bool IsDead()
+    protected bool IsDead()
     {
-        return false;
+
+        if (this.health > 0)
+        {
+            return false;
+        }
+        else
+        {
+            Destroy(gameObject);
+            return true;           
+        }
+        
     }
 
-    public void Movement(Unit moveTowards)
+    protected void Movement(Unit moveTowards)
     {
         this.transform.position = Vector3.MoveTowards(this.transform.position, moveTowards.transform.position, speed*Time.deltaTime);
         //Debug.Log("It works");
     }
 
     //returns the closest unit to the current unit
-    public Unit ClosestUnit(Unit[] units)
+    protected Unit ClosestUnit(Unit[] units)
     {
         float lowestDist = int.MaxValue;
         float closestUnit = int.MaxValue;
@@ -75,7 +78,7 @@ public abstract class Unit : MonoBehaviour
             if (units[k].IsDead() == false)
             {
                 //determines the distance of the unit
-                float dist = (this.transform.position - units[k].transform.position).sqrMagnitude;
+                float dist = Vector3.Distance(units[k].transform.position, this.transform.position);
                 //Debug.Log(dist);
 
                 if (this != units[k]) //checks if the unit it is checking is not itself
@@ -119,7 +122,7 @@ public abstract class Unit : MonoBehaviour
         return output;
     }
 
-    public void Logic()
+    protected void Logic()
     {
         Unit[] units = GameObject.FindObjectsOfType<Unit>();
 
@@ -130,15 +133,10 @@ public abstract class Unit : MonoBehaviour
             Unit unitToAttack = ClosestUnit(units);
             Combat(unitToAttack);
         }
-        
-
-
-
-
 
     }
 
-    public void OnTriggerEnter(Collider other)
+    protected void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Unit")
         {
@@ -146,7 +144,7 @@ public abstract class Unit : MonoBehaviour
         }
     }
 
-    public void OnTriggerExit(Collider other)
+    protected void OnTriggerExit(Collider other)
     {
         if(other.tag == "Unit")
         {
