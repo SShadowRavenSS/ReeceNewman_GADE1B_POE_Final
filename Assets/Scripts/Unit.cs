@@ -52,7 +52,6 @@ public abstract class Unit : MonoBehaviour
         }
         else
         {
-            Destroy(gameObject);
             return true;           
         }
         
@@ -133,6 +132,12 @@ public abstract class Unit : MonoBehaviour
             Unit unitToAttack = ClosestUnit(units);
             Combat(unitToAttack);
         }
+
+        if(IsDead() == true)
+        {
+            Destroy(gameObject);
+        }
+        
 
     }
 
