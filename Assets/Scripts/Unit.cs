@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 public abstract class Unit : MonoBehaviour
@@ -18,9 +19,12 @@ public abstract class Unit : MonoBehaviour
     protected float attackRange;
     protected string type;
     private Random rng = new Random();
-    protected bool isInRange;
+    protected bool isInRange = false;
     [SerializeField] protected Material[] mat;
     [SerializeField] protected int team;
+    protected float timer = 0f;
+    protected Image healthBar;
+
 
     //Accessors for the variables
 
@@ -125,35 +129,52 @@ public abstract class Unit : MonoBehaviour
     {
         Unit[] units = GameObject.FindObjectsOfType<Unit>();
 
-        Movement(ClosestUnit(units));
-
-        if(isInRange == true)
+        if(timer > 0.02f)
         {
-            Unit unitToAttack = ClosestUnit(units);
-            Combat(unitToAttack);
-        }
 
-        if(IsDead() == true)
-        {
-            Destroy(gameObject);
+            if (IsDead() == true)
+            {
+                Destroy(gameObject);
+            }
+
+            if (isInRange == true)
+            {
+                Unit unitToAttack = ClosestUnit(units);
+                Combat(unitToAttack);
+                if(unitToAttack.health <= 0)
+                {
+                    Destroy(unitToAttack.gameObject);
+                    isInRange = false;
+                }
+            }
+            else
+            {
+                Movement(ClosestUnit(units));
+            }
+            timer = 0f;
         }
-        
+        timer += Time.deltaTime;
+
+
 
     }
 
-    protected void OnTriggerEnter(Collider other)
+    protected void OnCollisionEnter(Collision other)
     {
-        if(other.tag == "Unit")
+        if (other.gameObject.tag == "Unit")
         {
+            Debug.Log("memes");
             isInRange = true;    
         }
     }
 
-    protected void OnTriggerExit(Collider other)
+    protected void OnCollisionExit(Collision other)
     {
-        if(other.tag == "Unit")
+        if(other.gameObject.tag == "Unit")
         {
             isInRange = false;
         }
     }
+
+    
 }

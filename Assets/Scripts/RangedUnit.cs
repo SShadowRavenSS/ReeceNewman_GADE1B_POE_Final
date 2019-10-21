@@ -14,7 +14,7 @@ public class RangedUnit : Unit
         speed = 2f;
         health = 10f;
         team = Random.Range(1, 3);
-        GetComponent<MeshRenderer>().material = mat[team - 1];
+      //  GetComponent<MeshRenderer>().material = mat[team - 1];
     }
 
     // Update is called once per frame
