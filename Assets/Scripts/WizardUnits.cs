@@ -12,11 +12,11 @@ public class WizardUnits : Unit
         speed = 2f;
         health = 10;
         maxHealth = health;
-        team = Random.Range(0, 2);
+        team = 2;
         attackRange = 1;
 
-        GetComponent<MeshRenderer>().material = mat[team];
-        healthBar = GetComponentsInChildren<Image>()[1];
+       // GetComponent<MeshRenderer>().material = mat[team];
+       // healthBar = GetComponentsInChildren<Image>()[1];
     }
 
     private void AoeAttack(Unit[] possibleTargets)

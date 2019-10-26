@@ -43,15 +43,18 @@ public abstract class Unit : MonoBehaviour
 
         //BoxCollider temp = GetComponent<BoxCollider>();
         //lDebug.Log(temp.size);
-        
-        
+
+        healthBar = GetComponentsInChildren<Image>()[1];
         healthBar.fillAmount = (float)health/maxHealth;
     }
 
     protected void Combat(Unit unitToAttack)
     {
-
-        unitToAttack.health -= this.attack;
+        if(unitToAttack != this)
+        {
+            unitToAttack.health -= this.attack;
+        }
+        
 
         Debug.Log("Attttttttack!!!!  Health Remaining: " + unitToAttack.health);
     }
@@ -154,8 +157,11 @@ public abstract class Unit : MonoBehaviour
 
             if (IsInRange(unitToAttack) == true)
             {
+                if(unitToAttack != this)
+                {
+                    Combat(unitToAttack);
+                }
                 
-                Combat(unitToAttack);
                 if(unitToAttack.health <= 0)
                 {
                     Destroy(unitToAttack.gameObject);

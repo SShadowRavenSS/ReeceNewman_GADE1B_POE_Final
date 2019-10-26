@@ -16,7 +16,7 @@ public class MeleeUnit : Unit
         attackRange = 1;
 
         GetComponent<MeshRenderer>().material = mat[team];
-        healthBar = GetComponentsInChildren<Image>()[1];
+       // healthBar = GetComponentsInChildren<Image>()[1];
 
     }
 
