@@ -16,7 +16,7 @@ public class RangedUnit : Unit
         attackRange = 2;
         
         GetComponent<MeshRenderer>().material = mat[team];
-        //healthBar = GetComponentsInChildren<Image>()[1];
+        
     }
 
 }

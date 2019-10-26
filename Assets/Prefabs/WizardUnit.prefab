@@ -187,6 +187,7 @@ MonoBehaviour:
   mat:
   - {fileID: 2100000, guid: 5c1128d74eed9d249889ca310973ba59, type: 2}
   - {fileID: 2100000, guid: c458fb0846985044a85101941b4fd2d7, type: 2}
+  - {fileID: 2100000, guid: c113cbc7c21aee34ca91e92a3d6f417f, type: 2}
   team: 0
   healthBar: {fileID: 0}
 --- !u!1 &4435254694764513167

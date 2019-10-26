@@ -15,8 +15,8 @@ public class WizardUnits : Unit
         team = 2;
         attackRange = 1;
 
-       // GetComponent<MeshRenderer>().material = mat[team];
-       // healthBar = GetComponentsInChildren<Image>()[1];
+        GetComponent<MeshRenderer>().material = mat[team];
+       
     }
 
     private void AoeAttack(Unit[] possibleTargets)
