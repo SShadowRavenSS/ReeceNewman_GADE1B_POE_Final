@@ -152,26 +152,38 @@ public abstract class Unit : MonoBehaviour
             {
                 Destroy(gameObject);
             }
-
             Unit unitToAttack = ClosestUnit(units);
 
-            if (IsInRange(unitToAttack) == true)
+            if (this is WizardUnits)
             {
-                if(unitToAttack != this)
+                if(AoeAttack(units) == false)
                 {
-                    Combat(unitToAttack);
-                }
-                
-                if(unitToAttack.health <= 0)
-                {
-                    Destroy(unitToAttack.gameObject);
-                    
+                    Movement(unitToAttack);
                 }
             }
             else
             {
-                Movement(ClosestUnit(units));
+                
+
+                if (IsInRange(unitToAttack) == true)
+                {
+                    if (unitToAttack != this)
+                    {
+                        Combat(unitToAttack);
+                    }
+
+                    if (unitToAttack.health <= 0)
+                    {
+                        Destroy(unitToAttack.gameObject);
+
+                    }
+                }
+                else
+                {
+                    Movement(ClosestUnit(units));
+                }
             }
+            
             timer = 0f;
         }
         timer += Time.deltaTime;
@@ -197,7 +209,20 @@ public abstract class Unit : MonoBehaviour
         
     }
 
-    
+    private bool AoeAttack(Unit[] possibleTargets)
+    {
+        bool didAttack = false;
+        for (int i = 0; i < possibleTargets.Length; i++)
+        {
+            if (IsInRange(possibleTargets[i]) == true && possibleTargets[i].Team != 2)
+            {
+                Combat(possibleTargets[i]);
+                didAttack = true;
+            }
 
-    
+        }
+        return didAttack;
+    }
+
+
 }

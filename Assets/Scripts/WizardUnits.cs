@@ -13,21 +13,12 @@ public class WizardUnits : Unit
         health = 10;
         maxHealth = health;
         team = 2;
-        attackRange = 1;
+        attackRange = 20;
 
         GetComponent<MeshRenderer>().material = mat[team];
        
     }
 
-    private void AoeAttack(Unit[] possibleTargets)
-    {
-        for (int i = 0; i < possibleTargets.Length; i++)
-        {
-            if(IsInRange(possibleTargets[i]) == true && possibleTargets[i].Team != 2)
-            {
-                Combat(possibleTargets[i]);
-            }
-        }
-    }
+    
 
 }
