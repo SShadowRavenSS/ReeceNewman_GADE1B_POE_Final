@@ -7,37 +7,46 @@ using UnityEngine.UI;
 public abstract class Unit : MonoBehaviour
 {
     //Variable declarations
-    protected int faction;
     protected bool isAttacking;
     [SerializeField]
-    protected float health;
-    protected float maxHealth;
+    protected int health;
+    protected int maxHealth;
     [SerializeField]
     protected float speed;
-    protected float attack;
+    protected int attack;
     [SerializeField]
     protected float attackRange;
     protected string type;
     private Random rng = new Random();
-    protected bool isInRange = false;
     [SerializeField] protected Material[] mat;
     [SerializeField] protected int team;
     protected float timer = 0f;
+    [SerializeField]
     protected Image healthBar;
 
 
     //Accessors for the variables
 
-    public float Health { get => health; set => health = value; }
+    
     public float MaxHealth { get => maxHealth; }
-    public float Speed { get => speed; set => speed = value; }
-    public float Attack { get => attack; set => attack = value; }
+    public float Speed { get => speed; set => speed = value; }   
     public float AttackRange { get => attackRange; set => attackRange = value; }
-    public int Faction { get => faction; set => faction = value; }
     public bool IsAttacking { get => isAttacking; set => isAttacking = value; }
     public string Type { get => type; set => type = value; }
+    public int Health { get => health; set => health = value; }
+    public int Attack { get => attack; set => attack = value; }
+    public int Team { get => team; set => team = value; }
 
-    
+    void Update()
+    {
+        Logic();
+
+        //BoxCollider temp = GetComponent<BoxCollider>();
+        //lDebug.Log(temp.size);
+        
+        
+        healthBar.fillAmount = (float)health/maxHealth;
+    }
 
     protected void Combat(Unit unitToAttack)
     {
@@ -80,23 +89,27 @@ public abstract class Unit : MonoBehaviour
             //checks that the unit is not dead
             if (units[k].IsDead() == false)
             {
-                //determines the distance of the unit
-                float dist = Vector3.Distance(units[k].transform.position, this.transform.position);
-                //Debug.Log(dist);
-
-                if (this != units[k]) //checks if the unit it is checking is not itself
+                if(units[k].team != this.team)
                 {
-                    //checks if the unit is closer than any other previous unit and if so saves that units index and distance
-                    if (dist < lowestDist)
+
+                    //determines the distance of the unit
+                    float dist = Vector3.Distance(units[k].transform.position, this.transform.position);
+                    //Debug.Log(dist);
+
+                    if (this != units[k]) //checks if the unit it is checking is not itself
                     {
-                        lowestDist = dist;
-                        closestUnit = k;
-                    }
+                        //checks if the unit is closer than any other previous unit and if so saves that units index and distance
+                        if (dist < lowestDist)
+                        {
+                            lowestDist = dist;
+                            closestUnit = k;
+                        }
 
-                }
-                else
-                {
-                    thisUnit = k;
+                    }
+                    else
+                    {
+                        thisUnit = k;
+                    }
                 }
 
             }
@@ -129,7 +142,7 @@ public abstract class Unit : MonoBehaviour
     {
         Unit[] units = GameObject.FindObjectsOfType<Unit>();
 
-        if(timer > 0.02f)
+        if(timer > 0.1f)
         {
 
             if (IsDead() == true)
@@ -137,14 +150,16 @@ public abstract class Unit : MonoBehaviour
                 Destroy(gameObject);
             }
 
-            if (isInRange == true)
+            Unit unitToAttack = ClosestUnit(units);
+
+            if (IsInRange(unitToAttack) == true)
             {
-                Unit unitToAttack = ClosestUnit(units);
+                
                 Combat(unitToAttack);
                 if(unitToAttack.health <= 0)
                 {
                     Destroy(unitToAttack.gameObject);
-                    isInRange = false;
+                    
                 }
             }
             else
@@ -159,22 +174,24 @@ public abstract class Unit : MonoBehaviour
 
     }
 
-    protected void OnCollisionEnter(Collision other)
+    protected bool IsInRange(Unit unitToAttack)
     {
-        if (other.gameObject.tag == "Unit")
+
+
+        if (this.attackRange <= Vector3.Distance(this.transform.position, unitToAttack.transform.position))
         {
-            Debug.Log("memes");
-            isInRange = true;    
+            return false;
         }
+        else
+        {
+            Debug.Log("Memes");
+            return true;
+        }
+       
+        
     }
 
-    protected void OnCollisionExit(Collision other)
-    {
-        if(other.gameObject.tag == "Unit")
-        {
-            isInRange = false;
-        }
-    }
+    
 
     
 }
