@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2282066928327092741}
   - component: {fileID: 127892648738505162}
   - component: {fileID: 8802141007819242399}
+  - component: {fileID: 8977241819551992386}
   m_Layer: 0
   m_Name: WizardUnit
   m_TagString: Untagged
@@ -93,6 +94,26 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8977241819551992386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2086868737111351471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c94b5610d601874189f07d76984a169, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 0
+  speed: 0
+  attackRange: 0
+  mat:
+  - {fileID: 2100000, guid: 5c1128d74eed9d249889ca310973ba59, type: 2}
+  - {fileID: 2100000, guid: c458fb0846985044a85101941b4fd2d7, type: 2}
+  team: 0
+  healthBar: {fileID: 0}
 --- !u!1 &4301094140774014667
 GameObject:
   m_ObjectHideFlags: 0
