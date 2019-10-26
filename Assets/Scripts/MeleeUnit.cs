@@ -10,7 +10,7 @@ public class MeleeUnit : Unit
     {
         attack = 2;
         speed = 2f;
-        health = 10;
+        health = 150;
         maxHealth = health;
         team = Random.Range(0, 2);
         attackRange = 1;
