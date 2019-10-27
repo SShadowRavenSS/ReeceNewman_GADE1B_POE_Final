@@ -12,7 +12,17 @@ public abstract class Building : MonoBehaviour
     [SerializeField] protected GameObject[] unitOptions;
 
     //Provide abstract method defenitions
-    abstract public bool Death();
+    public bool Death()
+    {
+        if (this.health > 0)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
 
     public int Health { get => health; set => health = value; }
     public int MaxHealth { get => maxHealth; }

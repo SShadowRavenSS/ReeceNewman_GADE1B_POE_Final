@@ -85,15 +85,5 @@ public class FactoryBuilding : Building
 
     }
 
-    public override bool Death()
-    {
-        if (health <= 0)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
+    
 }

@@ -67,7 +67,18 @@ public abstract class Unit : MonoBehaviour
         }
         
 
-        Debug.Log("Attttttttack!!!!  Health Remaining: " + unitToAttack.health);
+       // Debug.Log("Attttttttack!!!!  Health Remaining: " + unitToAttack.health);
+    }
+
+    protected void Combat(Building unitToAttack)
+    {
+        if (unitToAttack != this)
+        {
+            unitToAttack.Health -= this.attack;
+        }
+
+
+        Debug.Log("Attttttttack!!!!  Health Remaining: " + unitToAttack.Health);
     }
 
     protected bool IsDead()
@@ -88,6 +99,12 @@ public abstract class Unit : MonoBehaviour
     {
         this.transform.position = Vector3.MoveTowards(this.transform.position, moveTowards.transform.position, speed*Time.deltaTime);
         //Debug.Log("It works");
+    }
+
+    protected void Movement(Building moveTowards)
+    {
+        this.transform.position = Vector3.MoveTowards(this.transform.position, moveTowards.transform.position, speed * Time.deltaTime);
+        Debug.Log("It works");
     }
 
     //returns the closest unit to the current unit
@@ -138,6 +155,62 @@ public abstract class Unit : MonoBehaviour
             Debug.DrawLine(this.transform.position, units[(int)closestUnit].transform.position);
             return units[(int)closestUnit];
             
+        }
+        else
+        {
+            //Debug.Log(units[(int)closestUnit].transform.position);
+            return units[thisUnit];
+        }
+
+    }
+
+    protected Building ClosestUnit(Building[] units)
+    {
+        float lowestDist = int.MaxValue;
+        float closestUnit = int.MaxValue;
+        int thisUnit = 0;
+
+        //runs a loop through all the units in the array
+        for (int k = 0; k < units.Length; k++)
+        {
+            //checks that the unit is not dead
+            if (units[k].Death() == false)
+            {
+                if (units[k].Faction != this.team)
+                {
+
+                    //determines the distance of the unit
+                    float dist = Vector3.Distance(units[k].transform.position, this.transform.position);
+                    //Debug.Log(dist);
+
+                    if (this != units[k]) //checks if the unit it is checking is not itself
+                    {
+                        //checks if the unit is closer than any other previous unit and if so saves that units index and distance
+                        if (dist < lowestDist)
+                        {
+                            lowestDist = dist;
+                            closestUnit = k;
+                        }
+
+                    }
+                    else
+                    {
+                        thisUnit = k;
+                    }
+                }
+
+            }
+
+        }
+
+
+        //check to ensure integrety of code by returning either this unit or the closest unit determined
+        if (closestUnit != int.MaxValue)
+        {
+            //Debug.Log(units[(int)closestUnit].transform.position);
+            Debug.DrawLine(this.transform.position, units[(int)closestUnit].transform.position);
+            return units[(int)closestUnit];
+
         }
         else
         {
