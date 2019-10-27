@@ -46,6 +46,17 @@ public abstract class Unit : MonoBehaviour
 
         healthBar = GetComponentsInChildren<Image>()[1];
         healthBar.fillAmount = (float)health/maxHealth;
+
+        if(gameObject.tag == "Team1")
+        {
+            team = 0;
+        }
+        else if(gameObject.tag == "Team2")
+        {
+            team = 1;
+        }
+
+        gameObject.GetComponent<MeshRenderer>().material = mat[team];
     }
 
     protected void Combat(Unit unitToAttack)

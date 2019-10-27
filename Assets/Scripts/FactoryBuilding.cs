@@ -29,7 +29,7 @@ public class FactoryBuilding : Building
     // Update is called once per frame
     void Update()
     {
-        if (timer >= 5f)
+        if (timer >= 10f)
         {
             SpawnUnits();
             timer = 0f;
@@ -50,12 +50,16 @@ public class FactoryBuilding : Building
             {
                 GameObject createdUnit = Instantiate(unitOptions[1]);
                 createdUnit.transform.position = new Vector3(gameObject.transform.position.x + 1, gameObject.transform.position.y, transform.position.z);
+                createdUnit.tag = "Team1";
+                createdUnit.GetComponent<MeshRenderer>().material = mat[team];
 
             }
             else
             {
                 GameObject createdUnit = Instantiate(unitOptions[1]);
                 createdUnit.transform.position = new Vector3(gameObject.transform.position.x + 1, gameObject.transform.position.y, transform.position.z);
+                createdUnit.tag = "Team2";
+                createdUnit.GetComponent<MeshRenderer>().material = mat[team];
             }
 
         }
@@ -66,11 +70,15 @@ public class FactoryBuilding : Building
             {
                 GameObject createdUnit = Instantiate(unitOptions[0]);
                 createdUnit.transform.position = new Vector3(gameObject.transform.position.x + 1, gameObject.transform.position.y, transform.position.z);
+                createdUnit.tag = "Team1";
+                createdUnit.GetComponent<MeshRenderer>().material = mat[team];
             }
             else
             {
                 GameObject createdUnit = Instantiate(unitOptions[0]);
                 createdUnit.transform.position = new Vector3(gameObject.transform.position.x + 1, gameObject.transform.position.y, transform.position.z);
+                createdUnit.tag = "Team2";
+                createdUnit.GetComponent<MeshRenderer>().material = mat[team];
             }
         }
 
