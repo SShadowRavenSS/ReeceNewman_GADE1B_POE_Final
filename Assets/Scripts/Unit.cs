@@ -240,37 +240,59 @@ public abstract class Unit : MonoBehaviour
                 Destroy(gameObject);
             }
             Unit unitToAttack = ClosestUnit(units);
+            Building buildToAttack = ClosestUnit(buildings);
 
-            if (this is WizardUnits)
+            if(Vector3.Distance(gameObject.transform.position, buildToAttack.transform.position)> Vector3.Distance(gameObject.transform.position, unitToAttack.transform.position))
             {
-                if(AoeAttack(units) == false)
+                if (this is WizardUnits)
                 {
-                    Movement(unitToAttack);
+                    if (AoeAttack(units) == false)
+                    {
+                        Movement(unitToAttack);
+                    }
+                }
+                else
+                {
+
+
+                    if (IsInRange(unitToAttack) == true)
+                    {
+                        if (unitToAttack != this)
+                        {
+                            Combat(unitToAttack);
+                        }
+
+                        if (unitToAttack.health <= 0)
+                        {
+                            Destroy(unitToAttack.gameObject);
+
+                        }
+                    }
+                    else
+                    {
+                        Movement(ClosestUnit(units));
+                    }
                 }
             }
             else
             {
-                
-
-                if (IsInRange(unitToAttack) == true)
+                if (IsInRange(buildToAttack) == true)
                 {
-                    if (unitToAttack != this)
-                    {
-                        Combat(unitToAttack);
-                    }
+                    Combat(unitToAttack);
 
-                    if (unitToAttack.health <= 0)
+                    if (buildToAttack.Health <= 0)
                     {
-                        Destroy(unitToAttack.gameObject);
+                        Destroy(buildToAttack.gameObject);
 
                     }
                 }
                 else
                 {
-                    Movement(ClosestUnit(units));
+                    Movement(ClosestUnit(buildings));
                 }
+
             }
-            
+
             timer = 0f;
         }
         timer += Time.deltaTime;
@@ -294,6 +316,23 @@ public abstract class Unit : MonoBehaviour
         }
        
         
+    }
+
+    protected bool IsInRange(Building unitToAttack)
+    {
+
+
+        if (this.attackRange <= Vector3.Distance(this.transform.position, unitToAttack.transform.position))
+        {
+            return false;
+        }
+        else
+        {
+            Debug.Log("Memes");
+            return true;
+        }
+
+
     }
 
     private bool AoeAttack(Unit[] possibleTargets)

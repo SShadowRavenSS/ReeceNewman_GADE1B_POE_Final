@@ -8,17 +8,7 @@ public class ResourceBuilding : Building
     private int resourcePoolRemaining, generatedResources, resourcesPerRound, maxPool;
     private float timer;
 
-    public override bool Death()
-    {
-        if (this.health > 0)
-        {
-            return false;
-        }
-        else
-        {
-            return true;
-        }
-    }
+    
 
     // Start is called before the first frame update
     void Start()
