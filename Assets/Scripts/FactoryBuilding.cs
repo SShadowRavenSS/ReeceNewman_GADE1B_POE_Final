@@ -22,6 +22,7 @@ public class FactoryBuilding : Building
         faction = Random.Range(0, 2);
         health = 100;
         maxHealth = health;
+        GetComponent<MeshRenderer>().material = mat[faction];
 
     }
 
