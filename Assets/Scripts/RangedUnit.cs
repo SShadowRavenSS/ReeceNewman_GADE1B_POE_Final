@@ -12,10 +12,7 @@ public class RangedUnit : Unit
         speed = 2f;
         health = 100;
         maxHealth = health;
-        //team = Random.Range(0, 2);
         attackRange = 2;
-
-       // GetComponent<MeshRenderer>().material = mat[team];
 
     }
 

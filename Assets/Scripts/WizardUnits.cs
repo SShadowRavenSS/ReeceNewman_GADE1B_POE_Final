@@ -8,15 +8,13 @@ public class WizardUnits : Unit
     // Start is called before the first frame update
     void Start()
     {
-        attack = 1;
+        attack = 2;
         speed = 2f;
         health = 50;
         maxHealth = health;
         team = 2;
-        attackRange = 3;
-
+        attackRange = 4;
         GetComponent<MeshRenderer>().material = mat[team];
-       
     }
 
     

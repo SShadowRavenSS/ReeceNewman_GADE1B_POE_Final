@@ -12,12 +12,7 @@ public class MeleeUnit : Unit
         speed = 2f;
         health = 150;
         maxHealth = health;
-       // team = Random.Range(0, 2);
         attackRange = 1;
-
-        //GetComponent<MeshRenderer>().material = mat[team];
-
-
 
     }
 

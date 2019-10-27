@@ -259,7 +259,7 @@ public abstract class Unit : MonoBehaviour
                     }
                     else
                     {
-                        if (unitToAttack != null && unitToAttack.Team != team )
+                        if (unitToAttack != null && unitToAttack.Team != team && unitToAttack)
                         {
                             Movement(ClosestUnit(units));
                         }
