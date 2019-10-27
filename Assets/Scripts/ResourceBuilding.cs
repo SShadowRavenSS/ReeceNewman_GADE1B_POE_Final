@@ -30,12 +30,14 @@ public class ResourceBuilding : Building
         health = 100;
         maxHealth = health;
         faction = Random.Range(0, 2);
+
+        GetComponent<MeshRenderer>().material = mat[Faction];
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(timer<= 0.1f)
+        if(timer<= 1f)
         {
             GameEngine temp = GameObject.FindObjectOfType<GameEngine>();
             if(faction == 0)

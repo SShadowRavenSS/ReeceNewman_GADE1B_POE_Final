@@ -8,6 +8,7 @@ public abstract class Building : MonoBehaviour
     protected int faction;
     protected int health;
     protected int maxHealth;
+    [SerializeField] protected Material[] mat;
 
     //Provide abstract method defenitions
     abstract public bool Death();

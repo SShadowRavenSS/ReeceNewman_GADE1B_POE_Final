@@ -5,7 +5,8 @@ using UnityEngine;
 public class GameEngine : MonoBehaviour
 {
     [SerializeField] GameObject[] options = new GameObject[3];
-    [SerializeField] static int MIN_X = -10, MAX_X = 10, MIN_Z = -10, MAX_Z = 10, UNITS = 6;
+    [SerializeField] GameObject[] buildings = new GameObject[2];
+    [SerializeField] static int MIN_X = -10, MAX_X = 10, MIN_Z = -10, MAX_Z = 10, UNITS = 6, BUILDINGS = 2;
     private int team1Resources, team2Resources;
 
     public int Team1Resources { get => team1Resources; set => team1Resources = value; }
@@ -18,6 +19,12 @@ public class GameEngine : MonoBehaviour
         {
             CreateUnit();
         }
+
+        for (int k = 0; k < BUILDINGS; k++)
+        {
+            CreateBuilding();
+        }
+
     }
 
     // Update is called once per frame
@@ -31,5 +38,11 @@ public class GameEngine : MonoBehaviour
         GameObject unit = Instantiate(options[Random.Range(0, 3)]);
         unit.transform.position = new Vector3(Random.Range(MIN_X, MAX_X), 0, Random.Range(MIN_Z, MAX_Z));
 
+    }
+
+    void CreateBuilding()
+    {
+        GameObject build = Instantiate(buildings[Random.Range(0, 2)]);
+        build.transform.position = new Vector3(Random.Range(MIN_X, MAX_X), 0, Random.Range(MIN_Z, MAX_Z));
     }
 }

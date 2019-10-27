@@ -118,6 +118,8 @@ public abstract class Unit : MonoBehaviour
             }
 
         }
+
+
         //check to ensure integrety of code by returning either this unit or the closest unit determined
         if (closestUnit != int.MaxValue)
         {
@@ -144,6 +146,7 @@ public abstract class Unit : MonoBehaviour
     protected void Logic()
     {
         Unit[] units = GameObject.FindObjectsOfType<Unit>();
+        Building[] buildings = GameObject.FindObjectsOfType<Building>();
 
         if(timer > 0.1f)
         {
