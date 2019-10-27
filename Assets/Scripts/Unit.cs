@@ -98,13 +98,13 @@ public abstract class Unit : MonoBehaviour
     protected void Movement(Unit moveTowards)
     {
         this.transform.position = Vector3.MoveTowards(this.transform.position, moveTowards.transform.position, speed*Time.deltaTime);
-        //Debug.Log("It works");
+        
     }
 
     protected void Movement(Building moveTowards)
     {
         this.transform.position = Vector3.MoveTowards(this.transform.position, moveTowards.transform.position, speed * Time.deltaTime);
-        Debug.Log("It works");
+        
     }
 
     //returns the closest unit to the current unit
@@ -112,7 +112,7 @@ public abstract class Unit : MonoBehaviour
     {
         float lowestDist = int.MaxValue;
         float closestUnit = int.MaxValue;
-        int thisUnit = 0;
+        Unit returnedUnit = null;
 
         //runs a loop through all the units in the array
         for (int k = 0; k < units.Length; k++)
@@ -134,33 +134,25 @@ public abstract class Unit : MonoBehaviour
                         {
                             lowestDist = dist;
                             closestUnit = k;
+                            returnedUnit = units[k];
                         }
 
                     }
                     else
                     {
-                        thisUnit = k;
+                        
                     }
                 }
 
             }
 
         }
-
-
-        //check to ensure integrety of code by returning either this unit or the closest unit determined
-        if (closestUnit != int.MaxValue)
+        if(returnedUnit != null)
         {
-            //Debug.Log(units[(int)closestUnit].transform.position);
-            Debug.DrawLine(this.transform.position, units[(int)closestUnit].transform.position);
-            return units[(int)closestUnit];
-            
+            Debug.DrawLine(this.transform.position, returnedUnit.transform.position);
         }
-        else
-        {
-            //Debug.Log(units[(int)closestUnit].transform.position);
-            return units[thisUnit];
-        }
+        
+        return returnedUnit;
 
     }
 
@@ -168,7 +160,8 @@ public abstract class Unit : MonoBehaviour
     {
         float lowestDist = int.MaxValue;
         float closestUnit = int.MaxValue;
-        int thisUnit = 0;
+        
+        Building returnedUnit = null;
 
         //runs a loop through all the units in the array
         for (int k = 0; k < units.Length; k++)
@@ -190,33 +183,24 @@ public abstract class Unit : MonoBehaviour
                         {
                             lowestDist = dist;
                             closestUnit = k;
+                            returnedUnit = units[k];
                         }
 
                     }
                     else
                     {
-                        thisUnit = k;
+                        
                     }
                 }
 
             }
 
         }
-
-
-        //check to ensure integrety of code by returning either this unit or the closest unit determined
-        if (closestUnit != int.MaxValue)
+        if (returnedUnit != null)
         {
-            //Debug.Log(units[(int)closestUnit].transform.position);
-            Debug.DrawLine(this.transform.position, units[(int)closestUnit].transform.position);
-            return units[(int)closestUnit];
-
+            Debug.DrawLine(this.transform.position, returnedUnit.transform.position);
         }
-        else
-        {
-            //Debug.Log(units[(int)closestUnit].transform.position);
-            return units[thisUnit];
-        }
+        return returnedUnit;
 
     }
 
@@ -242,14 +226,19 @@ public abstract class Unit : MonoBehaviour
             Unit unitToAttack = ClosestUnit(units);
             Building buildToAttack = ClosestUnit(buildings);
 
-            if(Vector3.Distance(gameObject.transform.position, buildToAttack.transform.position)> Vector3.Distance(gameObject.transform.position, unitToAttack.transform.position))
+            if(unitToAttack != null && buildToAttack != null && Vector3.Distance(gameObject.transform.position, buildToAttack.transform.position) > Vector3.Distance(gameObject.transform.position, unitToAttack.transform.position))
             {
                 if (this is WizardUnits)
                 {
                     if (AoeAttack(units) == false)
                     {
-                        Movement(unitToAttack);
+                        if (team != unitToAttack.Team)
+                        {
+                            Movement(unitToAttack);
+                        }
+
                     }
+                    
                 }
                 else
                 {
@@ -257,7 +246,7 @@ public abstract class Unit : MonoBehaviour
 
                     if (IsInRange(unitToAttack) == true)
                     {
-                        if (unitToAttack != this)
+                        if (unitToAttack != this && unitToAttack.Team != team && unitToAttack != null)
                         {
                             Combat(unitToAttack);
                         }
@@ -270,29 +259,57 @@ public abstract class Unit : MonoBehaviour
                     }
                     else
                     {
-                        Movement(ClosestUnit(units));
+                        if (unitToAttack.Team != team && unitToAttack != null)
+                        {
+                            Movement(ClosestUnit(units));
+                        }
+
                     }
                 }
+                
             }
             else
             {
-                if (IsInRange(buildToAttack) == true)
+                if (this is WizardUnits)
                 {
-                    Combat(unitToAttack);
-
-                    if (buildToAttack.Health <= 0)
+                    if (AoeAttack(units) == false)
                     {
-                        Destroy(buildToAttack.gameObject);
+                        if (team != unitToAttack.Team)
+                        {
+                            Movement(unitToAttack);
+                        }
 
                     }
+
                 }
                 else
                 {
-                    Movement(ClosestUnit(buildings));
+                    if (buildToAttack.Faction != team && buildToAttack != null)
+                    {
+                        if (IsInRange(buildToAttack) == true && unitToAttack != null)
+                        {
+                         
+
+                            if (buildToAttack.Faction != team)
+                            {
+                                Combat(buildToAttack);
+                            }
+
+                            if (buildToAttack.Health <= 0)
+                            {
+                                Destroy(buildToAttack.gameObject);
+
+                            }
+                        }
+                        else
+                        {
+                           
+                            Movement(ClosestUnit(buildings));
+                        }
+                    }
                 }
-
+                
             }
-
             timer = 0f;
         }
         timer += Time.deltaTime;
@@ -311,7 +328,7 @@ public abstract class Unit : MonoBehaviour
         }
         else
         {
-            Debug.Log("Memes");
+            
             return true;
         }
        
@@ -328,7 +345,7 @@ public abstract class Unit : MonoBehaviour
         }
         else
         {
-            Debug.Log("Memes");
+            
             return true;
         }
 

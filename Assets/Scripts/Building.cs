@@ -1,15 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public abstract class Building : MonoBehaviour
 {
     //Variable declarations
     protected int faction;
-    protected int health;
+    [SerializeField] protected int health;
     protected int maxHealth;
     [SerializeField] protected Material[] mat;
     [SerializeField] protected GameObject[] unitOptions;
+    protected Image healthBar;
 
     //Provide abstract method defenitions
     public bool Death()

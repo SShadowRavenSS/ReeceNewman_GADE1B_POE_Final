@@ -13,7 +13,7 @@ public class WizardUnits : Unit
         health = 50;
         maxHealth = health;
         team = 2;
-        attackRange = 5;
+        attackRange = 3;
 
         GetComponent<MeshRenderer>().material = mat[team];
        

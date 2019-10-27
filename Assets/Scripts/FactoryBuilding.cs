@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FactoryBuilding : Building
 {
@@ -35,6 +36,9 @@ public class FactoryBuilding : Building
             timer = 0f;
         }
         timer += Time.deltaTime;
+
+        healthBar = GetComponentsInChildren<Image>()[1];
+        healthBar.fillAmount = (float)health / maxHealth;
     }
 
     public void SpawnUnits()

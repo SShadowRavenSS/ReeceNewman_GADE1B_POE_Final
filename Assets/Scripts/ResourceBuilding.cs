@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ResourceBuilding : Building
 {
@@ -22,6 +23,9 @@ public class ResourceBuilding : Building
         faction = Random.Range(0, 2);
 
         GetComponent<MeshRenderer>().material = mat[Faction];
+
+        healthBar = GetComponentsInChildren<Image>()[1];
+        healthBar.fillAmount = (float)health / maxHealth;
     }
 
     // Update is called once per frame
