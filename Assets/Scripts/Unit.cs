@@ -246,7 +246,7 @@ public abstract class Unit : MonoBehaviour
 
                     if (IsInRange(unitToAttack) == true)
                     {
-                        if (unitToAttack != this && unitToAttack.Team != team && unitToAttack != null)
+                        if (unitToAttack != null && unitToAttack != this && unitToAttack.Team != team )
                         {
                             Combat(unitToAttack);
                         }
@@ -259,7 +259,7 @@ public abstract class Unit : MonoBehaviour
                     }
                     else
                     {
-                        if (unitToAttack.Team != team && unitToAttack != null)
+                        if (unitToAttack != null && unitToAttack.Team != team )
                         {
                             Movement(ClosestUnit(units));
                         }
@@ -284,7 +284,7 @@ public abstract class Unit : MonoBehaviour
                 }
                 else
                 {
-                    if (buildToAttack.Faction != team && buildToAttack != null)
+                    if (buildToAttack != null && buildToAttack.Faction != team)
                     {
                         if (IsInRange(buildToAttack) == true && unitToAttack != null)
                         {

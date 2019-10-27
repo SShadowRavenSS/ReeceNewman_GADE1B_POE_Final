@@ -13,12 +13,12 @@ public class CameraMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
 
-        //Vector3 mouse = Camera.main.ScreenToViewportPoint(Input.mousePosition);
-        //float mouseScroll = Input.GetAxis("Mouse ScrollWheel");
-        //transform.position = new Vector3(mouse.x, mouse.y, transform.position.z);
-       // Camera.main.fieldOfView = mouseScroll;
+        transform.position = new Vector3(0, 15, 0);
+        Vector3 mouse = Camera.main.ScreenToViewportPoint(Input.mousePosition);
+        
+        transform.position += new Vector3(mouse.x, mouse.y, transform.position.z);
+        //Camera.main.fieldOfView = mouseScroll;
         
 
 
