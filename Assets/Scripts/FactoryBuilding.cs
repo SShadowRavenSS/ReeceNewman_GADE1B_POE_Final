@@ -28,7 +28,7 @@ public class FactoryBuilding : Building
     // Update is called once per frame
     void Update()
     {
-        if (timer >= 2f)
+        if (timer >= 5f)
         {
             SpawnUnits();
             timer = 0f;
@@ -48,12 +48,13 @@ public class FactoryBuilding : Building
             if (team == 0)
             {
                 GameObject createdUnit = Instantiate(unitOptions[1]);
-                
-                
+                createdUnit.transform.position = new Vector3(gameObject.transform.position.x + 1, gameObject.transform.position.y, transform.position.z);
+
             }
             else
             {
                 GameObject createdUnit = Instantiate(unitOptions[1]);
+                createdUnit.transform.position = new Vector3(gameObject.transform.position.x + 1, gameObject.transform.position.y, transform.position.z);
             }
 
         }

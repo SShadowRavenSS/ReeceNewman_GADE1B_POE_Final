@@ -6,7 +6,7 @@ public class GameEngine : MonoBehaviour
 {
     [SerializeField] GameObject[] options = new GameObject[3];
     [SerializeField] GameObject[] buildings = new GameObject[2];
-    [SerializeField] static int MIN_X = -10, MAX_X = 10, MIN_Z = -10, MAX_Z = 10, UNITS = 6, BUILDINGS = 2;
+    [SerializeField] static int MIN_X = -10, MAX_X = 10, MIN_Z = -10, MAX_Z = 10, UNITS = 6, BUILDINGS = 6;
     private int team1Resources, team2Resources;
 
     public int Team1Resources { get => team1Resources; set => team1Resources = value; }
