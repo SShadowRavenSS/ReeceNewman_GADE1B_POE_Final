@@ -4,22 +4,33 @@ using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
 {
+    [SerializeField] private float speed;
     // Start is called before the first frame update
     void Start()
     {
-        
+        speed = 5;
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        transform.position = new Vector3(0, 15, 0);
-        Vector3 mouse = Camera.main.ScreenToViewportPoint(Input.mousePosition);
-        
-        transform.position += new Vector3(mouse.x, mouse.y, transform.position.z);
-        //Camera.main.fieldOfView = mouseScroll;
-        
+        if (Input.GetKey(KeyCode.D))
+        {
+            transform.Translate(new Vector3(speed * Time.deltaTime, 0, 0));
+        }
+        if (Input.GetKey(KeyCode.A))
+        {
+            transform.Translate(new Vector3(-speed * Time.deltaTime, 0, 0));
+        }
+        if (Input.GetKey(KeyCode.S))
+        {
+            transform.Translate(new Vector3(0, -speed * Time.deltaTime, 0));
+        }
+        if (Input.GetKey(KeyCode.W))
+        {
+            transform.Translate(new Vector3(0, speed * Time.deltaTime, 0));
+        }
 
 
     }
