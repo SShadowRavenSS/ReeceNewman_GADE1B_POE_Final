@@ -34,7 +34,7 @@ public class FactoryBuilding : Building
     // Update is called once per frame
     void Update()
     {
-        if (timer >= 10f)
+        if (timer >= 1f)
         {
             Logic();
             timer = 0f;

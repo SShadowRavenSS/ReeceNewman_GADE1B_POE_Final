@@ -13,6 +13,7 @@ public abstract class Building : MonoBehaviour
     [SerializeField] protected GameObject[] unitOptions;
     protected Image healthBar;
     private int counter = 0;
+    private bool resetCounter = false;
 
     //Provide abstract method defenitions
     public bool Death()
@@ -33,7 +34,7 @@ public abstract class Building : MonoBehaviour
 
     protected void Logic()
     {
-        bool resetCounter = false;
+        
 
         GameEngine ge = GameObject.FindObjectOfType<GameEngine>();
         //Checks type of building
