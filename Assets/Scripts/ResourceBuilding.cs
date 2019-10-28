@@ -33,16 +33,7 @@ public class ResourceBuilding : Building
     {
         if(timer >= 1f)
         {
-            GameEngine temp = GameObject.FindObjectOfType<GameEngine>();
-            if(faction == 0)
-            {
-                temp.Team1Resources += GenerateResources();
-
-            }
-            else
-            {
-                temp.Team2Resources += GenerateResources();
-            }
+            Logic();
             timer = 0f;
         }
         timer += Time.deltaTime;

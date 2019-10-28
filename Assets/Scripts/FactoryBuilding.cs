@@ -7,6 +7,9 @@ public class FactoryBuilding : Building
 {
     private string unitType;
     private float timer;
+    private int productionSpeed;
+
+    public int ProductionSpeed { get => productionSpeed; set => productionSpeed = value; }
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +26,7 @@ public class FactoryBuilding : Building
         faction = Random.Range(0, 2);
         health = 100;
         maxHealth = health;
+        productionSpeed = 5;
         GetComponent<MeshRenderer>().material = mat[faction];
 
     }
@@ -32,7 +36,7 @@ public class FactoryBuilding : Building
     {
         if (timer >= 10f)
         {
-            SpawnUnits();
+            Logic();
             timer = 0f;
         }
         timer += Time.deltaTime;
@@ -88,6 +92,8 @@ public class FactoryBuilding : Building
 
 
     }
+
+    
 
     
 }
