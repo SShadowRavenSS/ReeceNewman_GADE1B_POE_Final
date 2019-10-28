@@ -5,6 +5,8 @@ using UnityEngine;
 public class CameraMovement : MonoBehaviour
 {
     [SerializeField] private float speed;
+    private float zoomSpeed = 20f;
+    private float minZoomFOV = 10f;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,7 +16,7 @@ public class CameraMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        //Movement
         if (Input.GetKey(KeyCode.D))
         {
             transform.Translate(new Vector3(speed * Time.deltaTime, 0, 0));
@@ -32,6 +34,24 @@ public class CameraMovement : MonoBehaviour
             transform.Translate(new Vector3(0, speed * Time.deltaTime, 0));
         }
 
+        //Zooming
+        if (Input.GetAxis("Mouse ScrollWheel") > 0)
+        {
+            Camera.main.fieldOfView -= speed/2;
+        }
+        else if(Input.GetAxis("Mouse ScrollWheel") < 0)
+        {
+            Camera.main.fieldOfView += speed / 2;
+        }
 
+    }
+
+    public void ZoomIn()
+    {
+        Camera.main.fieldOfView -= zoomSpeed / 8;
+        if (Camera.main.fieldOfView < minZoomFOV)
+        {
+            Camera.main.fieldOfView = minZoomFOV;
+        }
     }
 }
