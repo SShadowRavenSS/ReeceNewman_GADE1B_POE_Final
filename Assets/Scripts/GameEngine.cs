@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameEngine : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class GameEngine : MonoBehaviour
     [SerializeField] GameObject[] buildings = new GameObject[2];
     [SerializeField] static int MIN_X = -10, MAX_X = 10, MIN_Z = -10, MAX_Z = 10, UNITS = 6, BUILDINGS = 6;
     private int team1Resources, team2Resources;
+    [SerializeField] Text teamText;
 
     public int Team1Resources { get => team1Resources; set => team1Resources = value; }
     public int Team2Resources { get => team2Resources; set => team2Resources = value; }
@@ -30,7 +32,7 @@ public class GameEngine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        teamText.text = "Team 1 resources: " + Team1Resources + "\n Team 2 Resources: " + Team2Resources;
     }
 
     void CreateUnit()

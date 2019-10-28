@@ -10,10 +10,10 @@ public class WizardUnits : Unit
     {
         attack = 2;
         speed = 2f;
-        health = 50;
+        health = 70;
         maxHealth = health;
         team = 2;
-        attackRange = 4;
+        attackRange = 3;
         GetComponent<MeshRenderer>().material = mat[team];
     }
 
