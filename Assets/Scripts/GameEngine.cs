@@ -32,7 +32,7 @@ public class GameEngine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        teamText.text = "Team 1 resources: " + Team1Resources + "\n Team 2 Resources: " + Team2Resources;
+        teamText.text = " Team 1(Red) resources: " + Team1Resources + "\n Team 2(Blue) Resources: " + Team2Resources;
     }
 
     void CreateUnit()

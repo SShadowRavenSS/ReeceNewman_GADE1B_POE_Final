@@ -31,7 +31,7 @@ public class ResourceBuilding : Building
     // Update is called once per frame
     void Update()
     {
-        if(timer <= 1f)
+        if(timer >= 1f)
         {
             GameEngine temp = GameObject.FindObjectOfType<GameEngine>();
             if(faction == 0)
