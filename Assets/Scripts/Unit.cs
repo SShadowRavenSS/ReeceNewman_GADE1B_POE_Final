@@ -254,6 +254,15 @@ public abstract class Unit : MonoBehaviour
                         if (unitToAttack.health <= 0)
                         {
                             Destroy(unitToAttack.gameObject);
+                            GameEngine ge = GameObject.FindObjectOfType<GameEngine>();
+                            if(this.team == 0)
+                            {
+                                ge.Team1Resources++;
+                            }
+                            else
+                            {
+                                ge.Team2Resources++;
+                            }
 
                         }
                     }
@@ -298,7 +307,15 @@ public abstract class Unit : MonoBehaviour
                             if (buildToAttack.Health <= 0)
                             {
                                 Destroy(buildToAttack.gameObject);
-
+                                GameEngine ge = GameObject.FindObjectOfType<GameEngine>();
+                                if (this.team == 0)
+                                {
+                                    ge.Team1Resources++;
+                                }
+                                else
+                                {
+                                    ge.Team2Resources++;
+                                }
                             }
                         }
                         else

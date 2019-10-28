@@ -24,8 +24,7 @@ public class ResourceBuilding : Building
 
         GetComponent<MeshRenderer>().material = mat[Faction];
 
-        healthBar = GetComponentsInChildren<Image>()[1];
-        healthBar.fillAmount = (float)health / maxHealth;
+        
     }
 
     // Update is called once per frame
@@ -37,6 +36,9 @@ public class ResourceBuilding : Building
             timer = 0f;
         }
         timer += Time.deltaTime;
+
+        healthBar = GetComponentsInChildren<Image>()[1];
+        healthBar.fillAmount = (float)health / maxHealth;
     }
 
     public int GenerateResources()
