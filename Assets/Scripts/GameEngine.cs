@@ -10,6 +10,7 @@ public class GameEngine : MonoBehaviour
     [SerializeField] static int MIN_X = -10, MAX_X = 10, MIN_Z = -10, MAX_Z = 10, UNITS = 6, BUILDINGS = 6;
     private int team1Resources, team2Resources;
     [SerializeField] Text teamText;
+    
 
     public int Team1Resources { get => team1Resources; set => team1Resources = value; }
     public int Team2Resources { get => team2Resources; set => team2Resources = value; }

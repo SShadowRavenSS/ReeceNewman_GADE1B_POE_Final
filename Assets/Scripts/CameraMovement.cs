@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CameraMovement : MonoBehaviour
 {
     [SerializeField] private float speed;
     private float zoomSpeed = 20f;
     private float minZoomFOV = 10f;
+    
     // Start is called before the first frame update
     void Start()
     {
